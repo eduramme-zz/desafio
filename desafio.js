@@ -77,4 +77,45 @@ function X(data){
 
         document.getElementById('container').appendChild(div);
     }
+
+    // Setando os botoes que mandam pra direita ou esquerda
+    document.getElementById('direita').addEventListener("click", slideDireita);
+    document.getElementById('esquerda').addEventListener("click", slideEsquerda);
+
+    document.getElementById('direita').disabled = false;
+    document.getElementById('esquerda').disabled = true;
+
+    // Definindo a contadora de clicks
+    direita = 0;
+    esquerda = 0;
+    document.getElementById('esquerda').style.borderRight = "25px solid grey";
+
+    // Move os slides para a direita
+    function slideDireita(){
+        direita ++;
+        document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
+        if (direita - esquerda > 0) {
+            // disable esquerda button
+            document.getElementById('esquerda').disabled = false;
+            document.getElementById('esquerda').style.borderRight = "25px solid darkblue";
+            // able direita button
+            document.getElementById('direita').disabled = true;
+            document.getElementById('direita').style.borderLeft = "25px solid grey";
+        }
+    }
+
+    // Move os Slides para a esquerda
+    function slideEsquerda(){
+        esquerda ++;
+        document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
+        if (direita - esquerda <= 0){
+            // disable esquerda button
+            document.getElementById('esquerda').disabled = true;
+            document.getElementById('esquerda').style.borderRight = "25px solid grey";
+            // able direita button
+            document.getElementById('direita').disabled = false;
+            document.getElementById('direita').style.borderLeft = "25px solid darkblue";
+            console.log("sou foda");
+        }
+    }
 }
