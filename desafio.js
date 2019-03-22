@@ -1,15 +1,11 @@
 // Função do JSONP
-console.log("hello")
+console.log("hello");
 
 function X(data){
 
-    console.log('hello')
-    console.log(data.data.recommendation[0].businessId);
     info = data;
     var products = info.data.recommendation;
     var reference = info.data.reference.item;
-
-    console.log(info);
 
     // cria uma div dentro de container --Reference
     var div = document.createElement('div');
@@ -38,10 +34,10 @@ function X(data){
     price.innerHTML = "por: " + reference.price + " <span class = 'payment' > " + reference.productInfo.paymentConditions + " </span> sem juros!!";
 
     // Coloca todos os elementos entao criados dentro da div inicial -- Reference
-    div.appendChild(image)
-    div.appendChild(name)
-    div.appendChild(oldPrice)
-    div.appendChild(price)
+    div.appendChild(image);
+    div.appendChild(name);
+    div.appendChild(oldPrice);
+    div.appendChild(price);
     document.getElementById('reference').appendChild(div);
 
 
@@ -74,10 +70,10 @@ function X(data){
         price.innerHTML = "por: <span class = 'big'>" + info.data.recommendation[i].price + " </span><span class = 'payment' > " + info.data.recommendation[i].productInfo.paymentConditions + " </span> sem juros!!";
 
         // Coloca todos os elementos entao criados dentro da div inicial
-        div.appendChild(image)
-        div.appendChild(name)
-        div.appendChild(oldPrice)
-        div.appendChild(price)
+        div.appendChild(image);
+        div.appendChild(name);
+        div.appendChild(oldPrice);
+        div.appendChild(price);
 
         document.getElementById('container').appendChild(div);
     }
