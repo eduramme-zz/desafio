@@ -7,7 +7,7 @@ http.createServer(function (request, response) {
 
     var filePath = '.' + request.url;
     if (filePath == './') {
-        filePath = './index.html';
+        filePath = './src/index.html';
     }
 
     var extname = String(path.extname(filePath)).toLowerCase();

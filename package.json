@@ -8,5 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eduardo Lennert Ramme",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node": "^11.12.0"
+  }
 }
