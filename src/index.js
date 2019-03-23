@@ -36,20 +36,17 @@ function createPrice(price, reference) {
 }
 
 function createReferenceProduct(reference) {
+
     // cria uma div dentro de container --Reference
     var productContainer = createProductContainer();
-
     // cria uma imagem -- Reference
     var image = createImageElement(reference.imageName);
-
     // Gera o reference name
     var name = createProductName(reference.name);
-
     // cria o preço antingo --Reference
     if (reference.oldPrice) {
         var oldPrice = createOldPrice(reference.oldPrice);
     }
-
     // cria o preço
     var price = createPrice(reference.price, reference);
 
@@ -123,7 +120,6 @@ function slideEsquerda() {
         // able direita button
         document.getElementById('direita').disabled = false;
         document.getElementById('direita').style.borderLeft = "25px solid darkblue";
-        console.log("sou foda");
     }
 }
 
@@ -205,33 +201,4 @@ function X(data) {
 
     // Definindo a contadora de clicks
     document.getElementById('esquerda').style.borderRight = "25px solid grey";
-
-    // // Move os slides para a direita
-    // function slideDireita() {
-    //     direita++;
-    //     document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
-    //     if (direita - esquerda > 0) {
-    //         // disable esquerda button
-    //         document.getElementById('esquerda').disabled = false;
-    //         document.getElementById('esquerda').style.borderRight = "25px solid darkblue";
-    //         // able direita button
-    //         document.getElementById('direita').disabled = true;
-    //         document.getElementById('direita').style.borderLeft = "25px solid grey";
-    //     }
-    // }
-
-    // // Move os Slides para a esquerda
-    // function slideEsquerda() {
-    //     esquerda++;
-    //     document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
-    //     if (direita - esquerda <= 0) {
-    //         // disable esquerda button
-    //         document.getElementById('esquerda').disabled = true;
-    //         document.getElementById('esquerda').style.borderRight = "25px solid grey";
-    //         // able direita button
-    //         document.getElementById('direita').disabled = false;
-    //         document.getElementById('direita').style.borderLeft = "25px solid darkblue";
-    //         console.log("sou foda");
-    //     }
-    // }
 }
