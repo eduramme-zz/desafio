@@ -1,3 +1,4 @@
+/* Estilizando a tabela e os titulos da head table */
 table {
     border-spacing: 0;
     border: 0;
@@ -23,14 +24,11 @@ th {
     
 }
 
-
-
 /* Contem o slider de produtos */
 #container {
     display: flex;
     width: 800px;
     height: 350px;
-    /* background-color: bisque; */
     overflow: hidden;
 }
 
@@ -38,18 +36,17 @@ th {
 #reference{
     display: flex;
     height: 350px;
-    /* background-color: rgb(222, 255, 184); */
     overflow: hidden;
 }
 
 /* A div que tem as setas pra direita e esquerda */
 #arrows{
-    /* background-color: brown; */
     display: flex;
     border-left: 1px solid grey;
 }
 
-#esquerda {
+/* Seta para a esquerda */
+#left {
     display:flex;
     justify-content: space-between;
     align-self: center;
@@ -65,7 +62,8 @@ th {
     cursor: pointer;
   }
 
-#direita {
+/* seta para a direita */
+#right {
     align-self: center;
     width: 0; 
     height: 0; 
@@ -79,11 +77,10 @@ th {
     cursor: pointer;
 }
 
-/* Div que engloba so produtos */
+/* Div que engloba os produtos */
 .product{
     display: inline-block;
     width: 150px;
-    /* background-color: rgb(160, 255, 255); */
     padding: 10px;
     margin: 10px 5px;
     transition-duration: 1s;
@@ -123,8 +120,4 @@ th {
 
 .payment {
     font-weight: bold;
-}
-
-h1 {
-    color: yellow;
 }

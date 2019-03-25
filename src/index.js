@@ -1,204 +1,135 @@
-// Função do JSONP
-var direita = 0;
-var esquerda = 0;
+// contadora das setas para a direita e para a esquerda
+var left = 0;
+var right = 0;
 
+// cria uma div dentro de container
 function createProductContainer() {
-    var div = document.createElement('div');
-    div.setAttribute('class', 'product');
-    return div;
+    var objDiv = document.createElement('div');
+    objDiv.setAttribute('class', 'product');
+    return objDiv;
 }
 
+// cria uma imagem
 function createImageElement(imageUrl){
-    var image = document.createElement('img');
-    image.src = imageUrl;
-    return image;
+    var objImage = document.createElement('img');
+    objImage.src = imageUrl;
+    return objImage;
 }
 
+// Gera o reference name
 function createProductName(productName) {
-    var name = document.createElement('p');
-    name.setAttribute('class', 'name');
-    name.innerHTML = productName;
-    return name;
+    var objName = document.createElement('p');
+    objName.setAttribute('class', 'name');
+    objName.innerHTML = productName;
+    return objName;
 }
 
+// cria o preço antingo
 function createOldPrice(oldPrice) {
-    var old = document.createElement('p');
-    old.setAttribute('class', 'oldPrice');
-    old.innerHTML = "de: " + oldPrice + "";
-    return old;
+    var objOldPrice = document.createElement('p');
+    objOldPrice.setAttribute('class', 'oldPrice');
+    objOldPrice.innerHTML = "de: " + oldPrice + "";
+    return objOldPrice;
 }
 
-function createPrice(price, reference) {
-    var vPrice = document.createElement('p');
-    vPrice.setAttribute('class', 'price');
-    vPrice.innerHTML = "por: " + price + " <span class = 'payment' > " + reference.productInfo.paymentConditions + " </span> sem juros!!";
-    return vPrice;
+// cria o preço
+function createPrice(price, productPath) {
+    var objPrice = document.createElement('p');
+    objPrice.setAttribute('class', 'price');
+    objPrice.innerHTML = "por: <span class = 'big'>" + price + " </span><span class = 'payment' > " + productPath.productInfo.paymentConditions + " </span> sem juros!!";
+    return objPrice;
 }
 
-function createReferenceProduct(reference) {
+// Cria um produto inteiro e coloca na respectiva lista
+// type = "reference" || type = "show"
+function createNewProduct(productPath, type){
 
-    // cria uma div dentro de container --Reference
+    // cria os elementos
     var productContainer = createProductContainer();
-    // cria uma imagem -- Reference
-    var image = createImageElement(reference.imageName);
-    // Gera o reference name
-    var name = createProductName(reference.name);
-    // cria o preço antingo --Reference
-    if (reference.oldPrice) {
-        var oldPrice = createOldPrice(reference.oldPrice);
+    var image = createImageElement(productPath.imageName);
+    var name = createProductName(productPath.name)
+    if (productPath.oldPrice){
+        var oldPrice = createOldPrice(productPath.oldPrice);
     }
-    // cria o preço
-    var price = createPrice(reference.price, reference);
-
-
-    // Coloca todos os elementos entao criados dentro da div inicial -- Reference
-    productContainer.appendChild(image);
-    productContainer.appendChild(name);
-    productContainer.appendChild(oldPrice);
-    productContainer.appendChild(price);
-    document.getElementById('reference').appendChild(productContainer);
-}
-
-function createSuggestedProduct(product) {
-    // cria uma div dentro de container
-    var div = document.createElement('div');
-    div.setAttribute('class', 'product');
-
-    // cria uma imagem
-    var image = createImageElement(product.imageName);
-
-    // cria o nome 
-    var name = document.createElement('p');
-    name.setAttribute('class', 'name');
-    name.innerHTML = product.name;
-
-    // cria o preço antingo
-    if (product.oldPrice) {
-        var oldPrice = document.createElement('p');
-        oldPrice.setAttribute('class', 'oldPrice');
-        oldPrice.innerHTML = "de: " + product.oldPrice + "";
-    }
-
-    // cria o preço
-    var price = document.createElement('p');
-    price.setAttribute('class', 'price');
-    price.innerHTML = "por: <span class = 'big'>" + product.price + " </span><span class = 'payment' > " + product.productInfo.paymentConditions + " </span> sem juros!!";
+    var price = createPrice(productPath.price, productPath);
 
     // Coloca todos os elementos entao criados dentro da div inicial
-    div.appendChild(image);
-    div.appendChild(name);
-    if (product.oldPrice){
-        div.appendChild(oldPrice);
-    }
-    div.appendChild(price);
+    productContainer.appendChild(image);
+    productContainer.appendChild(name);
 
-    document.getElementById('container').appendChild(div);
+    if (productPath.oldPrice){
+        productContainer.appendChild(oldPrice);
+    }
+    productContainer.appendChild(price);
+
+    if (type == "reference") {
+        document.getElementById('reference').appendChild(productContainer);
+    } else {
+        document.getElementById('container').appendChild(productContainer);
+    }
 }
 
+
+
+// Parte responsiva dos slides
+
 // Move os slides para a direita
-function slideDireita() {
-    direita++;
-    document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
-    if (direita - esquerda > 0) {
+function slideRight() {
+    right++;
+    document.querySelectorAll('.product')[1].style.marginLeft = right * (-800) + left * 800 + 5;
+    if (right - left > 0) {
         // disable esquerda button
-        document.getElementById('esquerda').disabled = false;
-        document.getElementById('esquerda').style.borderRight = "25px solid darkblue";
-        // able direita button
-        document.getElementById('direita').disabled = true;
-        document.getElementById('direita').style.borderLeft = "25px solid grey";
+        document.getElementById('left').disabled = false;
+        document.getElementById('left').style.borderRight = "25px solid darkblue";
+        // able direita button    
+        document.getElementById('right').disabled = true;    
+        document.getElementById('right').style.borderLeft = "25px solid grey";
     }
 }
 
 // Move os Slides para a esquerda
-function slideEsquerda() {
-    esquerda++;
-    document.querySelectorAll('.product')[1].style.marginLeft = direita * (-800) + esquerda * 800 + 5;
-    if (direita - esquerda <= 0) {
+function slideLeft() {
+    left++;
+    document.querySelectorAll('.product')[1].style.marginLeft = right * (-800) + left * 800 + 5;
+    if (right - left <= 0) {
         // disable esquerda button
-        document.getElementById('esquerda').disabled = true;
-        document.getElementById('esquerda').style.borderRight = "25px solid grey";
+        document.getElementById('left').disabled = true;
+        document.getElementById('left').style.borderRight = "25px solid grey";
         // able direita button
-        document.getElementById('direita').disabled = false;
-        document.getElementById('direita').style.borderLeft = "25px solid darkblue";
+        document.getElementById('right').disabled = false;
+        document.getElementById('right').style.borderLeft = "25px solid darkblue";
     }
 }
 
+// coloca addEventListener nas setas
 function bindArrowClickEvent(arrows){
     arrows.forEach(function(arrow){
-        var correctCallback = arrow.id === 'direita' ? slideDireita : slideEsquerda;
+        var correctCallback = arrow.id === "right" ? slideRight  : slideLeft;
         arrow.addEventListener('click', correctCallback);
     })
 }
 
+
 function X(data) {
 
-    var info = data;
-    var products = info.data.recommendation;
-    var reference = info.data.reference.item;
+    var products = data.data.recommendation;
+    var reference = data.data.reference.item;
 
-    // CRIAR FUNÇÃO RETORNANDO O PRODUTO
+    // cria o produto de referencia;
+    createNewProduct(data.data.reference.item, "reference");
 
-    createReferenceProduct(reference);
-
+    // cria os demais itens da vitrine
     for (var index = 0; index < products.length; index++) {
         var currentProduct = products[index];
-        createSuggestedProduct(currentProduct);
+        createNewProduct(currentProduct, "show");
     }
 
-    // for (i = 0; i < products.length; i++) {
-    //     console.log(info.data.recommendation[i].name);
-
-    //     // cria uma div dentro de container
-    //     var div = document.createElement('div');
-    //     div.setAttribute('class', 'product');
-
-    //     // cria uma imagem
-    //     var image = document.createElement('img');
-    //     image.src = info.data.recommendation[i].imageName;
-
-    //     // cria o nome 
-    //     var name = document.createElement('p');
-    //     name.setAttribute('class', 'name');
-    //     name.innerHTML = info.data.recommendation[i].name;
-
-    //     // cria o preço antingo
-    //     if (info.data.recommendation[i].oldPrice != null) {
-    //         var oldPrice = document.createElement('p');
-    //         oldPrice.setAttribute('class', 'oldPrice');
-    //         oldPrice.innerHTML = "de: " + info.data.recommendation[i].oldPrice + "";
-    //     }
-
-    //     // cria o preço
-    //     var price = document.createElement('p');
-    //     price.setAttribute('class', 'price');
-    //     price.innerHTML = "por: <span class = 'big'>" + info.data.recommendation[i].price + " </span><span class = 'payment' > " + info.data.recommendation[i].productInfo.paymentConditions + " </span> sem juros!!";
-
-    //     // Coloca todos os elementos entao criados dentro da div inicial
-    //     div.appendChild(image);
-    //     div.appendChild(name);
-    //     div.appendChild(oldPrice);
-    //     div.appendChild(price);
-
-    //     document.getElementById('container').appendChild(div);
-    // }
-
-    // Setando os botoes que mandam pra direita ou esquerda
-    // document.getElementById('direita').addEventListener("click", slideDireita);
-    // document.getElementById('esquerda').addEventListener("click", slideEsquerda);
-
+    // seleciona as setas e add o event listener nelas
     var arrows = document.querySelectorAll('#arrows button');
     bindArrowClickEvent(arrows);
 
-    // function bindArrowClickEvent(arrows){
-    //     arrows.forEach(function(arrow){
-    //         var correctCallback = arrow.id === 'direita' ? slideDireita : slideEsquerda;
-    //         arrow.addEventListener('click', correctCallback);
-    //     })
-    // }
+    document.getElementById('right').disabled = false;
+    document.getElementById('left').disabled = true;
 
-    document.getElementById('direita').disabled = false;
-    document.getElementById('esquerda').disabled = true;
-
-    // Definindo a contadora de clicks
-    document.getElementById('esquerda').style.borderRight = "25px solid grey";
+    document.getElementById('left').style.borderRight = "25px solid grey";
 }
