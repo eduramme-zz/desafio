@@ -20,11 +20,11 @@ function createImageElement(imageUrl){
 function createProductName(productName) {
     var objName = document.createElement('p');
     objName.setAttribute('class', 'name');
-    objName.innerHTML = productName;
+    objName.innerHTML = productName.substr(0, 75) + "...";
     return objName;
 }
 
-// cria o preço antingo
+// cria o preço antigo
 function createOldPrice(oldPrice) {
     var objOldPrice = document.createElement('p');
     objOldPrice.setAttribute('class', 'oldPrice');

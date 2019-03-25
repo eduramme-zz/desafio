@@ -28,14 +28,14 @@ th {
 #container {
     display: flex;
     width: 800px;
-    height: 350px;
+    height: 325px;
     overflow: hidden;
 }
 
 /* Contem o produto referencia */
 #reference{
     display: flex;
-    height: 350px;
+    height: 325px;
     overflow: hidden;
 }
 
